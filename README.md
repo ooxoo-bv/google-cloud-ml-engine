@@ -43,6 +43,7 @@ $client->predict(
         ]       
     ]
 ));
+```
 
 ### Next Steps
 
