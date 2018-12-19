@@ -21,7 +21,7 @@ on authenticating your client. Once authenticated, you'll be ready to start maki
 ```php
 require 'vendor/autoload.php';
 
-use Google\Cloud\MLEngine\MLEngineClient;
+use Ooxoo\GCloud\MLEngine\MLEngineClient;
 
 $client = new MLEngineClient();
 
@@ -46,4 +46,4 @@ $client->predict(
 
 ### Next Steps
 
-1. Understand the [official documentation](https://cloud.google.com/storage/docs).
+1. Understand the [official documentation](https://cloud.google.com/ml-engine/docs/).
