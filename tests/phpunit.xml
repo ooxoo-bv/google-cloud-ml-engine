@@ -1,0 +1,35 @@
+<!--
+  ~ (c) OOXOO B.V.
+  ~
+  ~ For the full copyright and license information, please view the LICENSE
+  ~ file that was distributed with this source code.
+  -->
+
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.4/phpunit.xsd"
+        backupGlobals="true"
+        backupStaticAttributes="false"
+        cacheTokens="false"
+        colors="false"
+        bootstrap="../vendor/autoload.php"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        forceCoversAnnotation="false"
+        processIsolation="false"
+        stopOnError="false"
+        stopOnFailure="false"
+        stopOnIncomplete="false"
+        stopOnSkipped="false"
+        stopOnRisky="false"
+        timeoutForSmallTests="1"
+        timeoutForMediumTests="10"
+        timeoutForLargeTests="60"
+        verbose="false">
+    <testsuites>
+        <testsuite name="unit">
+            <directory suffix="Test.php">./Unit</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
