@@ -24,13 +24,13 @@ class MLEngineClientTest extends TestCase
     public $connection;
     private $client;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->connection = $this->prophesize(Rest::class);
         $this->client = TestHelpers::stub(MLEngineClient::class, [['projectId' => self::PROJECT]]);
     }
 
-    public function testGetConfig()
+    public function testGetConfig(): void
     {
         $projectId = self::PROJECT;
         $response = ["serviceAccount" => "my-account@appspot.com"];
@@ -39,7 +39,7 @@ class MLEngineClientTest extends TestCase
         self::assertEquals($response, $this->client->getConfig());
     }
 
-    public function testPredict()
+    public function testPredict(): void
     {
         $projectId = self::PROJECT;
         $model = 'MyModel';
@@ -56,6 +56,30 @@ class MLEngineClientTest extends TestCase
         self::assertEquals(
             $response,
             $this->client->predict($model, $instances)
+        );
+    }
+
+    public function testPredictVersion(): void
+    {
+        $projectId = self::PROJECT;
+        $model = 'MyModel';
+        $instances = [["arg1" => "myModel", "arg2" => 2], ["arg1" => "Modelv3", "arg2" => 3]];
+        $response = ["Awesome" => "response"];
+
+
+        $this->connection
+            ->predict([
+                "name" => "projects/$projectId/models/$model/versions/v3",
+                "instances" => $instances,
+                "version" => "v3"
+            ])
+            ->willReturn($response);
+
+        $this->client->___setProperty('connection', $this->connection->reveal());
+
+        self::assertEquals(
+            $response,
+            $this->client->predict($model, $instances, ['version' => 'v3'])
         );
     }
 }

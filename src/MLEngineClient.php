@@ -87,17 +87,22 @@ class MLEngineClient
     /**
      * @param string $model
      * @param array $instances
-     * @param array $options
+     * @param array $options [optional] {
+     *      @type string $version The model version to ask for prediction
+     * }
      *
      * @return array
      * @throws \Google\Cloud\Core\Exception\NotFoundException
      */
     public function predict(string $model, array $instances, array $options = []): array
     {
-        $options += [
-            'name' => "projects/{$this->projectId}/models/$model",
-            'instances' => $instances
-        ];
+        $name = "projects/{$this->projectId}/models/$model";
+
+        if (isset($options['version'])) {
+            $name .= "/versions/{$options['version']}";
+        }
+
+        $options += ['name' => $name, 'instances' => $instances];
         return $this->connection->predict($options);
     }
 }
